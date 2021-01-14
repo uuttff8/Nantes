@@ -181,13 +181,13 @@ extension NantesLabel {
                 return
             }
 
-//            guard let dataDetector = self.dataDetector else {
-//                return
-//            }
-//            let detectorResult = attributedText.findCheckingResults(usingDetector: dataDetector)
+            guard let dataDetector = self.dataDetector else {
+                return
+            }
+            let detectorResult = attributedText.findCheckingResults(usingDetector: dataDetector)
             let existingLinks = attributedText.findExistingLinks()
-//            let results = detectorResult.union(existingLinks)
-            let results = existingLinks
+            let results = detectorResult.union(existingLinks)
+//            let results = existingLinks
             
             guard !results.isEmpty else {
                 return
