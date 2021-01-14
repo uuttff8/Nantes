@@ -61,9 +61,19 @@ extension NantesLabel {
 
             if let checkingText = self.text, let range = Range(result.range, in: checkingText) {
                 text = String(checkingText[range])
+                
+                guard !text!.contains("mailto:") else {
+                    break
+                }
             }
 
-            let link = NantesLabel.Link(attributes: attributes, activeAttributes: activeLinkAttributes, inactiveAttributes: inactiveLinkAttributes, linkTappedBlock: nil, result: result, text: text)
+            let link = NantesLabel.Link(attributes: attributes,
+                                        activeAttributes: activeLinkAttributes,
+                                        inactiveAttributes: inactiveLinkAttributes,
+                                        linkTappedBlock: nil,
+                                        result: result,
+                                        text: text)
+            
             links.append(link)
         }
 
@@ -188,6 +198,7 @@ extension NantesLabel {
             let existingLinks = attributedText.findExistingLinks()
             let results = detectorResult.union(existingLinks)
 //            let results = existingLinks
+
             
             guard !results.isEmpty else {
                 return
