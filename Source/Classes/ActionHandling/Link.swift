@@ -197,7 +197,7 @@ extension NantesLabel {
             let detectorResult = attributedText.findCheckingResults(usingDetector: dataDetector)
             let existingLinks = attributedText.findExistingLinks()
             let results = detectorResult.union(existingLinks)
-                .filter { $0.url?.absoluteString.contains("mailto:") == nil }
+                .filter { !($0.url?.absoluteString.contains("mailto:") ?? false) }
             
             guard !results.isEmpty else {
                 return
